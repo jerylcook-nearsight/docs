@@ -1,0 +1,47 @@
+---
+title: "Authentication"
+description: "Authenticate REST API requests with your API key"
+---
+
+Every request to the Nearsight REST API needs an API key, sent in the `X-API-Key` header.
+
+```bash
+curl https://api.nearsight.ai/api/v1/geo \
+  -H "X-API-Key: YOUR_API_KEY"
+```
+
+## Get your key
+
+1. Sign up at [nearsight.ai](https://nearsight.ai).
+2. Open the "Your API Key is Ready" email and click **Reveal Your API Key**.
+
+<Warning>
+  The reveal link expires after 24 hours.
+</Warning>
+
+Use the API key from that email. It is not the same thing as the API Secret Key.
+
+## Base URL
+
+All endpoints live under:
+
+```
+https://api.nearsight.ai/api
+```
+
+## Errors
+
+| Status | Meaning | What to do |
+| ------ | ------- | ---------- |
+| `401` | The key is missing or invalid. | Check that the `X-API-Key` header is present and the key is copied in full. |
+| `403` | The key is valid, but your plan doesn't include this endpoint. | Check your subscription tier at [nearsight.ai](https://nearsight.ai). |
+
+## Keep your key safe
+
+- Call the API from your server, not from browser or mobile code where the key can be read.
+- Store the key in an environment variable or a secrets manager, not in source control.
+- Your key identifies your account. Geofences and assets are always scoped to the key that made the request.
+
+## Connecting an AI assistant
+
+The MCP server at `https://mcp.nearsight.ai/mcp` does not use the API key. You sign in with your Nearsight account when your assistant prompts you. See [Connect your AI assistant](/#connect-your-ai-assistant).

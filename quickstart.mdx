@@ -1,47 +1,90 @@
 ---
 title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+description: "Create a geofence and send your first asset position"
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
+This walkthrough creates a geofence, sends one position for an asset, and confirms both landed. You need an API key first; see [Authentication](/authentication).
 
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+Set your key once so the examples run as written:
 
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+```bash
+export NEARSIGHT_API_KEY="YOUR_API_KEY"
+```
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Create a geofence">
+    Define a circle from a center point and a radius in meters.
 
     ```bash
-    npm install your-package
+    curl -X POST https://api.nearsight.ai/api/v1/geo/radius \
+      -H "X-API-Key: $NEARSIGHT_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "name": "Depot North",
+        "description": "Overnight parking yard",
+        "latitude": 38.9072,
+        "longitude": -77.0369,
+        "radiusInMeters": 500
+      }'
     ```
+
+    `name`, `latitude`, `longitude`, and `radiusInMeters` are required. You can also create fences [from WKT](/api-reference/geo-fences/create-a-geofence-from-wkt) or [import GeoJSON](/api-reference/geo-fences/import-geofences-from-a-geojson-featurecollection).
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+
+  <Step title="Send an asset position">
+    Report where an asset is right now.
 
     ```bash
-    your-cli init
+    curl -X POST https://api.nearsight.ai/api/v1/assets/track \
+      -H "X-API-Key: $NEARSIGHT_API_KEY" \
+      -H "Content-Type: application/json" \
+      -d '{
+        "name": "7145",
+        "type": "metrobus",
+        "timestamp": 1748224800000,
+        "latitude": 38.9072,
+        "longitude": -77.0369,
+        "bearing": 274.5,
+        "speed": 42.3,
+        "status": "IN_SERVICE"
+      }'
     ```
+
+    | Field | Required | Notes |
+    | ----- | -------- | ----- |
+    | `name` | Yes | The asset's unique identifier within its fleet. |
+    | `type` | Yes | The asset's classification. It must match a type that exists for your account. |
+    | `timestamp` | Yes | GPS fix time from the device, in Unix epoch milliseconds (UTC). Not the time you send the request. |
+    | `latitude`, `longitude` | Yes | WGS-84 decimal degrees. |
+    | `bearing` | No | Direction of travel in degrees, clockwise from true north. |
+    | `speed` | No | Speed in km/h. |
+    | `status` | No | One of `IN_SERVICE`, `OUT_OF_SERVICE`, `IDLE`, `MAINTENANCE`. |
+    | `information` | No | Freeform text or serialized JSON. Stored, not indexed. |
+
+    To send many positions in one call, post an array of the same objects to [the batch endpoint](/api-reference/asset-tracking/ingest-a-batch-of-asset-position-snapshots).
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
 
+  <Step title="Confirm the geofence exists">
     ```bash
-    your-cli start
+    curl https://api.nearsight.ai/api/v1/geo \
+      -H "X-API-Key: $NEARSIGHT_API_KEY"
     ```
+
+    The response lists the name and description of each geofence on your account.
+  </Step>
+
+  <Step title="Ask your AI assistant">
+    Connect the Nearsight MCP server to Claude or ChatGPT ([setup steps](/#connect-your-ai-assistant)), then ask about the data you just sent, for example: "Which assets are inside Depot North right now?"
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## Next steps
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+<CardGroup cols={2}>
+  <Card title="Connect Traccar" icon="plug" href="/api-reference/traccar-integration/register-a-traccar-integration">
+    Already running Traccar? Register it and Nearsight polls your devices for you.
+  </Card>
+  <Card title="API reference" icon="code" href="/api-reference/asset-tracking/track-an-asset">
+    Every endpoint, with request and response schemas.
+  </Card>
+</CardGroup>
