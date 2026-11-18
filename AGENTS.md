@@ -18,8 +18,11 @@
 
 ## Terminology
 
-{/* Add product-specific terms and preferred usage */}
-{/* Example: Use "workspace" not "project", "member" not "user" */}
+- Lead with "vendor-neutral": Nearsight works with whatever tracks the customer's assets. It is not tied to a tracking vendor or hardware.
+- Use "asset", not "vehicle", "bus" or "fleet vehicle". Nearsight is not specific to one industry.
+- Use "tracking source" for where positions come from (GPS trackers, IoT devices, an existing tracking platform).
+- MCP and A2A are supporting facts, not the headline. Say "Nearsight speaks MCP" rather than leading with "MCP-native".
+- "Nearsight Agents" (capital A) are the hosted, always-on agents: Exception watchdog, Incident impact. Customers enable them with rules; there is nothing to install.
 
 ## Style preferences
 
@@ -33,5 +36,4 @@
 
 ## Content boundaries
 
-{/* Define what should and shouldn't be documented */}
-{/* Example: Don't document internal admin features */}
+- Only describe a feature as available once it has shipped. Label anything else "in development" or "planned".

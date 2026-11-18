@@ -32,15 +32,15 @@ export NEARSIGHT_API_KEY="YOUR_API_KEY"
   </Step>
 
   <Step title="Send an asset position">
-    Report where an asset is right now.
+    Report where an asset is right now. The position can come from any source: a GPS tracker, an IoT device, or a forwarder on the tracking platform you already run.
 
     ```bash
     curl -X POST https://api.nearsight.ai/api/v1/assets/track \
       -H "X-API-Key: $NEARSIGHT_API_KEY" \
       -H "Content-Type: application/json" \
       -d '{
-        "name": "7145",
-        "type": "metrobus",
+        "name": "VAN-12",
+        "type": "delivery-van",
         "timestamp": 1748224800000,
         "latitude": 38.9072,
         "longitude": -77.0369,

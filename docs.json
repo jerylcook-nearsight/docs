@@ -29,5 +29,5 @@
     "links": [{ "label": "Support", "href": "mailto:jeryl.cook@nearsight.ai" }],
     "primary": { "type": "button", "label": "Get API Key", "href": "https://nearsight.ai" }
   },
-  "description": "Nearsight is real-time spatial intelligence for AI agents. We turn live location data from any asset (vehicles, equipment, devices, people, shipments) into answers that Claude, ChatGPT, or any MCP-capable agent can query and act on: where it is, where it's been, and what happened nearby."
+  "description": "Nearsight is vendor-neutral spatial intelligence built for AI agents. It takes live positions from any tracking source and any kind of asset (vehicles, equipment, devices, people, shipments) and turns them into something Claude, ChatGPT, or any MCP-capable agent can reason over: where it is, where it's been, and what happened nearby."
 }

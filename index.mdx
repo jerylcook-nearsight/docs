@@ -1,14 +1,16 @@
 ---
 title: "Introduction"
-description: "Real-time spatial intelligence for AI agents"
+description: "Vendor-neutral spatial intelligence for AI agents"
 ---
 
-Nearsight turns live location data from any asset (vehicles, equipment, devices, people, shipments) into answers that Claude, ChatGPT, or any MCP-capable agent can query and act on: where it is, where it's been, and what happened nearby.
+Nearsight is vendor-neutral spatial intelligence built for AI agents. It takes live positions from any tracking source and any kind of asset (vehicles, equipment, devices, people, shipments) and turns them into something Claude, ChatGPT, or any MCP-capable agent can reason over: where it is, where it's been, and what happened nearby.
+
+Nearsight isn't tied to a tracking vendor. If a system can make an HTTP request, it can send positions: GPS trackers, IoT devices, or the tracking platform you already run. Mixed fleets and assets that aren't vehicles all land in one place.
 
 There are two ways in:
 
-- **The REST API** sends data to Nearsight: asset positions and geofences.
-- **The MCP server** lets your AI assistant ask questions about that data in plain language.
+- **The REST API** sends data to Nearsight: asset positions and geofences, from any source.
+- **The MCP server** lets your AI assistant or agent ask questions about that data in plain language.
 
 ## Make your first call
 
@@ -42,7 +44,7 @@ There are two ways in:
 
 ## Connect your AI assistant
 
-Nearsight is an MCP server. Add it once and sign in with your Nearsight account when prompted.
+Nearsight speaks MCP, the open standard for connecting agents to tools. Add it once and sign in with your Nearsight account when prompted.
 
 **Server URL:** `https://mcp.nearsight.ai/mcp`
 
@@ -72,7 +74,19 @@ Nearsight is an MCP server. Add it once and sign in with your Nearsight account 
   </Tab>
 </Tabs>
 
-Once connected, ask things like "which buses passed within 500 meters of the depot in the last hour?" or "show the trajectory of the five fastest vehicles today."
+Once connected, ask things like "which assets passed within 500 meters of the depot in the last hour?" or "show the trajectory of the five fastest assets today."
+
+## Nearsight Agents
+
+<Note>
+  Nearsight Agents are in development and not available yet. This section describes what's coming.
+</Note>
+
+Asking questions is one half. The other half is not having to ask. Nearsight Agents are always-on agents that run on Nearsight's side, on the same spatial tools your assistant uses. There is nothing to install: you set rules and switch them on.
+
+- **Exception watchdog (in development).** Set rules for dwell, stale telemetry, and zone entry or exit. When a rule trips, the agent pulls the trajectory, checks what was nearby, and emails a plain-language explanation with the evidence, a likely cause, and a map.
+- **Incident impact (in development).** Give the agent an area, or let a weather alert define one. It reports which assets are inside, approaching, or just left.
+- **Agent-to-agent, A2A (planned).** Your own dispatch, support, or planning agents will be able to hand a Nearsight agent a task, such as investigating an asset or checking what's affected in an area.
 
 ## Need help?
 
